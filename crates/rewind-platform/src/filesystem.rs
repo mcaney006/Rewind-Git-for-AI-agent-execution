@@ -724,8 +724,8 @@ pub fn disk_space(path: &Path) -> Result<DiskSpace, FileSystemError> {
     // SAFETY: `statvfs` returned success and therefore initialized `stats`.
     let stats = unsafe { stats.assume_init() };
     Ok(DiskSpace {
-        available: u64::from(stats.f_bavail).saturating_mul(stats.f_frsize),
-        total: u64::from(stats.f_blocks).saturating_mul(stats.f_frsize),
+        available: stats.f_bavail.saturating_mul(stats.f_frsize),
+        total: stats.f_blocks.saturating_mul(stats.f_frsize),
     })
 }
 
@@ -1172,7 +1172,7 @@ impl EntryStat {
     }
 
     fn mode(&self) -> u32 {
-        u32::from(self.0.st_mode)
+        self.0.st_mode
     }
 
     fn size(&self) -> u64 {
@@ -1594,21 +1594,6 @@ fn verify_open_entry(
         Ok(())
     } else {
         Err(FileSystemError::ChangedDuringRead(path.to_path_buf()))
-    }
-}
-
-fn remove_partial_file(path: &Path) -> Result<(), FileSystemError> {
-    match fs::symlink_metadata(path) {
-        Ok(metadata) if !metadata.file_type().is_dir() => {
-            fs::remove_file(path).map_err(|error| io_error("remove failed clone", path, error))
-        }
-        Ok(_) => Err(io_error(
-            "remove failed clone",
-            path,
-            io::Error::new(io::ErrorKind::InvalidData, "clone left a directory"),
-        )),
-        Err(error) if error.kind() == io::ErrorKind::NotFound => Ok(()),
-        Err(error) => Err(io_error("inspect failed clone", path, error)),
     }
 }
 
