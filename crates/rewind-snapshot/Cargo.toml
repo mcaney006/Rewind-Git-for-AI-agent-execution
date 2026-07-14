@@ -1,0 +1,17 @@
+[package]
+name = "rewind-snapshot"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+rewind-domain = { path = "../rewind-domain" }
+rewind-platform = { path = "../rewind-platform" }
+rewind-store = { path = "../rewind-store" }
+serde_json.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true
+
+[lints]
+workspace = true

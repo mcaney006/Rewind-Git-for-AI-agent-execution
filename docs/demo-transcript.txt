@@ -1,0 +1,17 @@
+# Rewind deterministic demo transcript
+# Captured by `cargo xtask demo` on 2026-07-13, macOS 26.6 arm64/APFS.
+# UUIDs and timings vary on each run.
+
+Runs          019f5e4a-8ea2-7761-aab6-b6daea9a78f6 <> 019f5e4a-92ff-7661-a3a8-e642b47f6a86
+Relationship  LeftParentOfRight { fork_checkpoint: CheckpointId(019f5e4a-9064-78f3-8fb0-a5410253f56a) }
+Status        failed <> completed
+Exit          code 1 <> code 0
+Duration      1.06s <> 533ms
+Terminal      630 B <> 512 B
+Checkpoints   3 <> 2
+Warnings      0 <> 0
+Changed files 1
+  Modified { content_changed: true, entry_type: None, executable: None, permissions: None }  calculator.sh
+Evaluation    ./test.sh
+  left        code 1 in 470ms
+  right       code 0 in 438ms

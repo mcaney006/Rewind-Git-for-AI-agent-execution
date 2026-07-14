@@ -1,0 +1,20 @@
+[package]
+name = "rewind-capture"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+rewind-domain = { path = "../rewind-domain" }
+rewind-platform = { path = "../rewind-platform" }
+rewind-snapshot = { path = "../rewind-snapshot" }
+rewind-store = { path = "../rewind-store" }
+serde.workspace = true
+serde_json.workspace = true
+signal-hook.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true
+
+[lints]
+workspace = true

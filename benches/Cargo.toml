@@ -1,0 +1,24 @@
+[package]
+name = "rewind-benchmarks"
+version.workspace = true
+edition.workspace = true
+publish = false
+
+[features]
+run-benchmarks = []
+
+[[bench]]
+name = "rewind"
+path = "rewind.rs"
+harness = false
+test = false
+required-features = ["run-benchmarks"]
+
+[dependencies]
+rewind-domain = { path = "../crates/rewind-domain" }
+rewind-snapshot = { path = "../crates/rewind-snapshot" }
+rewind-store = { path = "../crates/rewind-store" }
+tempfile.workspace = true
+
+[lints]
+workspace = true

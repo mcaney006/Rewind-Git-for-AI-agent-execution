@@ -1,0 +1,15 @@
+[package]
+name = "rewind-tui"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+crossterm.workspace = true
+ratatui.workspace = true
+rewind-domain = { path = "../rewind-domain" }
+rewind-snapshot = { path = "../rewind-snapshot" }
+rewind-store = { path = "../rewind-store" }
+thiserror.workspace = true
+
+[lints]
+workspace = true
